@@ -9,7 +9,7 @@ const {v4}=require("uuid")
 
 
 router.get("/",(req,res)=>{
-    res.redirect("/login")
+    res.redirect("/user/login")
 })
 
 
