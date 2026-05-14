@@ -8,8 +8,8 @@ const authMiddleware=require("../middlewares/auth.middleware")
 const {v4}=require("uuid")
 
 
-router.get("/",authMiddleware,(req,res)=>{
-    res.redirect("/home")
+router.get("/",(req,res)=>{
+    res.redirect("/login")
 })
 
 

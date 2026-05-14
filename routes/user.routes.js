@@ -37,6 +37,9 @@ router.post("/register",body('email').trim().isEmail(),body('password').trim().i
 
 
 router.get("/login",(req,res)=>{
+    if(req.cookies.token){
+        return res.redirect("/home")
+    }
     const error = req.query.error || null;
     res.render("login", { error })
 })
@@ -63,7 +66,7 @@ router.post("/login",body('username').trim(),body('password').trim(),async (req,
             email:user.email
         },process.env.JWT_SECRET)
 
-        res.cookie("token",token)
+        res.cookie("token",token).setTimeout(24*60*60*1000) // 1 day expiration
         res.redirect("/home");
         
     }
