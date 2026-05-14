@@ -3,7 +3,11 @@ const jwt=require("jsonwebtoken")
 const authMiddleware=(req,res,next)=>{
     const token=req.cookies.token;
     if(!token){
-        return res.status(401).json({error:"Unauthorized"})
+        // For API endpoints, return JSON error; for page requests, redirect with error
+        if(req.path.includes("/api") || req.path.includes("/upload") || req.path.includes("/download")){
+            return res.status(401).json({error:"No token provided. Please login first."})
+        }
+        return res.redirect("/user/login?error=Please login to continue")
     }
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET)
@@ -12,7 +16,11 @@ const authMiddleware=(req,res,next)=>{
         next()
     }
     catch(error){
-        res.status(401).json({error:error.message})
+        // For API endpoints, return JSON error; for page requests, redirect with error
+        if(req.path.includes("/api") || req.path.includes("/upload") || req.path.includes("/download")){
+            return res.status(401).json({error:"Invalid or expired token. Please login again."})
+        }
+        res.redirect("/user/login?error=Session expired. Please login again.")
     }
 }
 

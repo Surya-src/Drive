@@ -1,6 +1,7 @@
 const express = require("express")
 const dotenv=require('dotenv');
 const dbConnection=require("./config/db")
+const errorHandler=require("./middlewares/error.middleware")
 dotenv.config();
 
 const app=express()
@@ -17,11 +18,19 @@ app.use(express.urlencoded({extended:true}))
 app.use("/user",userRoutes)
 app.use("/",indexRoutes)
 
-dbConnection();
-
 app.get("/",(req,res)=>{
     res.render("index")
 })
+
+// 404 handler - must come after all other routes
+app.use((req, res) => {
+    res.status(404).render("404");
+});
+
+// Global error handling middleware - must be last
+app.use(errorHandler);
+
+dbConnection();
 
 app.listen(3000,()=>{
     console.log("Server is running");
