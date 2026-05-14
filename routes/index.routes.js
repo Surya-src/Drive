@@ -8,6 +8,11 @@ const authMiddleware=require("../middlewares/auth.middleware")
 const {v4}=require("uuid")
 
 
+router.get("/",authMiddleware,(req,res)=>{
+    res.redirect("/home")
+})
+
+
 router.get("/home",authMiddleware,async (req,res)=>{
     try {
         const {username}=req
@@ -34,7 +39,7 @@ router.post("/upload-file",authMiddleware, upload.single('file'), async (req, re
         
         const data= await uploadFileToSupabase(fileUrl,buffer,mimetype)
         const fileRecord= await saveFileRecord(req.username,fileUrl)
-        res.json({message:"File uploaded successfully",data:data,fileRecord:fileRecord})
+        res.redirect("/home")
     }
     catch(error){
         if(error.message.includes("The resource already exists")){

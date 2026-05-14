@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const userModel=require("../models/user.model")
 
-router.get("/test",(req,res)=>{
-    res.send("This is a test route")
-})
 
 // show register form
 router.get("/register",(req,res)=>{
@@ -67,13 +64,18 @@ router.post("/login",body('username').trim(),body('password').trim(),async (req,
         },process.env.JWT_SECRET)
 
         res.cookie("token",token)
-        res.redirect("/user/home");
+        res.redirect("/home");
         
     }
     catch(error){
         res.redirect(`/user/login?error=${encodeURIComponent(error.message)}`);
     }
 
+})
+
+router.get("/logout",(req,res)=>{
+    res.clearCookie("token")
+    res.redirect("/user/login?message=Logged out successfully");
 })
 
 module.exports=router;

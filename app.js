@@ -18,9 +18,7 @@ app.use(express.urlencoded({extended:true}))
 app.use("/user",userRoutes)
 app.use("/",indexRoutes)
 
-app.get("/",(req,res)=>{
-    res.render("index")
-})
+
 
 // 404 handler - must come after all other routes
 app.use((req, res) => {
