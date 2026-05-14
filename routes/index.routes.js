@@ -48,7 +48,7 @@ router.post("/upload-file",authMiddleware, upload.single('file'), async (req, re
                 const fileUrl=`${req.username}/${originalname}_${v4()}`
                 const data= await uploadFileToSupabase(fileUrl,buffer,mimetype)
                 const fileRecord= await saveFileRecord(req.username,fileUrl)
-                return res.json({message:"File uploaded successfully",data:data,fileRecord:fileRecord})
+                return res.redirect("/home")
             } catch (retryError) {
                 return res.status(500).json({error: retryError.message})
             }
