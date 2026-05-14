@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <main class="p-4 bg-gray-100 dark:bd-gray-800 h-screen w-screen">
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="togglePop()">Upload File</button>
+        <div class="pop hidden backdrop-blur fixed top-0 left-0 h-screen w-screen flex item-center justify-center">
+            
+<div class="flex items-center justify-center w-96">
+    
+    <form class="w-full" action="/upload-file" method="post" enctype="multipart/form-data">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-default-strong border-black rounded rounded-base cursor-pointer hover:bg-neutral-tertiary-medium">
+            <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/></svg>
+                <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" name="file" />
+        </label>
+        <div class="flex items-center justify-evenly">
+            <button type="submit" class="text-dark bg-blue-500 box-border border border-black hover:bg-brand-strong focus:ring-10 focus:ring-brand-medium shadow-l font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-4">Submit</button>
+            <button type="button" onclick="togglePop()" class="text-dark bg-red-300 box-border border  border-black hover:bg-brand-strong focus:ring-10 focus:ring-brand-medium shadow-l font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-4">Close</button>
+        </div>
+    </form>
+</div> 
+
+        </div>
+        <div class="mt-6">
+                <h1 class="text-2xl font-bold mb-4">Your Files</h1>
+                <ul class="list-disc pl-5">
+                    <% files.forEach(function(file){ %>
+                        <li class="text-gray-700 hover:text-blue-500 cursor-pointer"><%= file %> 
+                        <a href="/download/<%= file %>" class="text-blue-500 hover:underline ml-2">Download</a>
+                        </li>
+                    <% }) %>
+                </ul>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script>
+        function togglePop(){
+            const pop=document.querySelector(".pop");
+            pop.classList.toggle("hidden")
+        }
+    </script>
+
+</body>
+
+</html>

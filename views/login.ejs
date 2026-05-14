@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 dark:bd-gray-800 flex items-center justify-center h-screen w-screen">
+
+    <form action="/user/login" method="post">
+        <div class="grid mb-6 gap-6 md:grid-cols-1">
+            <div>
+                <label for="username" class="block mb-2.5 text-sm font-medium text-heading">Username</label>
+                <input type="text" id="username"
+                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                    placeholder="Enter Username" required name="username" />
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
+                <input type="password" id="password"
+                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                    placeholder="•••••••••" required name="password" />
+            </div>
+            
+            <button type="submit"
+            class="text-dark bg-brand box-border border border-black hover:bg-brand-strong focus:ring-10 focus:ring-brand-medium shadow-l font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
+        </div>
+
+
+        
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+</body>
+
+</html>
